@@ -1,0 +1,29 @@
+html{
+    height: 100vh;
+}
+
+body{
+    width : 50%;
+}
+
+#UI{
+    float : left;
+    left : 20vw;
+    background-color: grey;
+
+}
+
+#user{
+    width : 100%;
+    height : 30%;
+}
+
+#bot{
+    width : 100%;
+    height : 30%;
+}
+
+#btn{
+    float : left;
+    left : 20%;
+}
