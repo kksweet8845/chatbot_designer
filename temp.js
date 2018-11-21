@@ -10,7 +10,6 @@ var obj = require(QAJson)
 var dic = []
 var bidic = []
 var scoreboard = []
-var Adic = []
 var Qdic = []
 
 app.listen(port)
@@ -44,20 +43,16 @@ function bigram_formation(){
         else{
             //A
             flag = 0
-            console.log(obj[keys])
-            Adic.push(obj[keys])
             count++
         }
     }
-    console.log('Q =========================')
+    console.log('=========================')
     console.log(dic)
 
-    console.log('A =========================')
-    console.log(Adic)
-
-    console.log('Q bigram =========================')
+    console.log('=========================')
     console.log(bidic)
 
+    console.log('Score : ' + scoreboard)
 }
 
 function question_bigram(string){
@@ -66,7 +61,6 @@ function question_bigram(string){
         tempS = string[i] + string[i+1]
         Qdic.push(tempS)
     }
-    console.log('User bigram =========================')
     console.log(Qdic)
 }
 
@@ -110,39 +104,7 @@ app.get('/list', function(req, res){
 app.get('/ask',function(req,res){
     Q = req.query.userQ
     question_bigram(Q)
-
-    for(var i = 0; i<scoreboard.length; i++){
-        scoreboard[i] = 0
-    }
-
     for(var i = 0; i < Qdic.length; i++){
-        for(var j = 0; j< bidic.length; j++){
-            if(bidic[j].includes(Qdic[i])){
-                scoreboard[j]++
-            }
-        }
-    }
 
-    for(var i = 0; i<scoreboard.length; i++){
-        scoreboard[i] = scoreboard[i]/bidic[i].length
     }
-
-    var highest_flag = -1
-    var highest_val = -1
-
-    for(var i = 0; i<scoreboard.length; i++){
-        if(scoreboard[i] != 0 && scoreboard[i] > highest_val){
-            highest_val = scoreboard[i]
-            highest_flag = i
-        }
-    }
-    console.log('Result Score : ' + scoreboard)
-
-    if(highest_flag == -1){
-        res.send('Cannot find fitting answer for your question')
-    }
-    else{
-        res.send(Adic[highest_flag])
-    }
-
 })
